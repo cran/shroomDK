@@ -1,0 +1,12 @@
+d9256c68c8ff7e8554ded63f581dc0d7 *DESCRIPTION
+1fdd6fef85c3e9dfa21972ef65bf8334 *LICENSE
+e5ccaea638891bf99b1635099661efdf *NAMESPACE
+80bc44c11085cae68b2d514b638663fa *R/auto_paginate_query.R
+db6f2c3e04f117457a7dafbbef77c9d8 *R/clean_query.R
+376382f8033ffc6b3f148fb5a9cfcd15 *R/create_query_token.R
+261ea8ed20eb6c1e21fa71f94a419713 *R/get_query_from_token.R
+f25db6253e641414e5dcb3f545ec18b0 *README.md
+ca472f34dfa46f45a7348628980f85bb *man/auto_paginate_query.Rd
+b7c624ca30bc009c44b4b48832b2b939 *man/clean_query.Rd
+725ad5bc3079b381564dcc6784e69fa1 *man/create_query_token.Rd
+91b820f143f610e59168514cc98f9a28 *man/get_query_from_token.Rd
