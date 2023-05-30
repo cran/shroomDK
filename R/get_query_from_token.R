@@ -4,7 +4,8 @@ library(httr)
 #' Get Query From Token
 #'
 #' Uses Flipside ShroomDK to access a Query Token (Run ID). This function is for pagination and multiple requests.
-#' Note: To reduce payload it returns a list of outputs (separating column names from rows). Use `clean_query()` to
+#' It is best suited for debugging and testing new queries. Consider `auto_paginate_query()` for queries already known to work as expected.
+#' Note: To reduce payload it returns a list of outputs (separating column names from rows). See `clean_query()` for converting result to a data frame.
 #'
 #' @param query_run_id queryRunId from `create_query_token()`, for token stored as `x`, use `x$result$queryRequest$queryRunId`
 #' @param api_key Flipside Crypto ShroomDK API Key
@@ -29,30 +30,26 @@ get_query_from_token <- function(query_run_id, api_key,
                                  result_format = "csv",
                                  api_url = "https://api-v2.flipsidecrypto.xyz/json-rpc"){
 
+  status_check_done <- FALSE
+  warn_flag <- FALSE
 
-  query_status <- get_query_status(query_run_id = query_run_id, api_key = api_key, api_url = api_url)
-  query_state <- query_status$result$queryRun$state
+  while (!status_check_done) {
+    query_status <- get_query_status(query_run_id = query_run_id, api_key = api_key, api_url = api_url)
+    query_state <- query_status$result$queryRun$state
 
-# implicit else for "QUERY_STATUS_SUCCESS"
-  if(query_state == "QUERY_STATE_FAILED"){
-  stop(query_status$result$queryRun$errorMessage)
-  } else if(query_state == "QUERY_STATE_CANCELED"){
-    stop("This query was canceled, typically by cancel_query()")
-  } else if(query_state != "QUERY_STATE_SUCCESS"){
-    warning("Query in process, checking again in 5 seconds")
-    Sys.sleep(5)
-    # run it back
-    return(
-      get_query_from_token(query_run_id = query_run_id,
-                           api_key = api_key,
-                           page_number = page_number,
-                           page_size = page_size,
-                           result_format = result_format,
-                           api_url = api_url
-      )
-    )
-  } else {
-
+    if(query_state == "QUERY_STATE_SUCCESS"){
+      status_check_done <- TRUE
+      next()
+    } else if(query_state == "QUERY_STATE_FAILED"){
+      status_check_done <- TRUE
+      stop(query_status$result$queryRun$errorMessage)
+    } else if(query_state == "QUERY_STATE_CANCELED"){
+      status_check_done <- TRUE
+      stop("This query was canceled, typically by cancel_query()")
+    } else if(query_state != "QUERY_STATE_SUCCESS"){
+      warning("Query in process, checking again in 5 seconds, use cancel_query() if needed.")
+      Sys.sleep(5)
+    }
   }
 
   headers = c(
