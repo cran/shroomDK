@@ -1,13 +1,13 @@
-3a1b88ae8a4d488ee92f5cfa084f921e *DESCRIPTION
+fb0d31d839e51d80047f2d563f050941 *DESCRIPTION
 1fdd6fef85c3e9dfa21972ef65bf8334 *LICENSE
 2fe666051d91d5e189c5882c15470a0d *NAMESPACE
-9c67a90e30d60878fa6008d2b2c28b4e *R/auto_paginate_query.R
+a6e3e723c8171215bea9ac835d03a67a *R/auto_paginate_query.R
 a052366e56c11cd1734aba2762ade144 *R/cancel_query.R
 8b4af1e693ce9976b5414ed2b80ab4a9 *R/clean_query.R
 e5022757922393c2e74e36b7519da8fa *R/create_query_token.R
 41f8f9704e08402800f7268cb69f9735 *R/get_query_from_token.R
 38cefdaf0298f825af130b8c47a347c5 *R/get_query_status.R
-cb51196374cbc1019db1ef51ca989c55 *README.md
+df8a6bfbc9730d236e065829d06aed4b *README.md
 41f766f9cf3df37ecf2c923dad794e42 *man/auto_paginate_query.Rd
 a42bb01f2dc04a933f9b5dc2c9de0799 *man/cancel_query.Rd
 e9e59859ad77147cd360baab3a609c8f *man/clean_query.Rd
